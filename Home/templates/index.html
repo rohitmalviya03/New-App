@@ -28,10 +28,14 @@
 						<p class="card-title">{{product.name}}</p>
             <p class="card-title">{{product.price}}</p>
             <p class="card-title">{{product.description}}</p>
-					</div>
-
 					
-				</div>
+		 <form method="POST" action="/">
+			{% csrf_token %}
+			<input hidden type="text" name ="product" value="{{product.id}}">
+			<input type="submit" class="float-right btn btn-light" value="Add to Cart">	
+		</form>	
+		</div>
+</div>
 				{% endfor %}
 			</div>
 		</div>

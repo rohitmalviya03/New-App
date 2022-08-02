@@ -20,11 +20,19 @@ from django.urls import path,include
 from django.conf.urls.static import static
 
 from django.conf import settings
-from Home.views import index,showdata
+from Home.views import index,showdata,login,register
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    path('showdata/abc/',showdata)
+    path('',index,name='homepage'),
+    path('showdata/abc/',showdata),
+    path('register/',register),
+    path('login/',login),
+   
+
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    # # path('register/',register),
+    
+    # path('hello',isExists)
+
     #  path("", include('home.urls')),
     
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -3,6 +3,7 @@ from unicodedata import category
 from django.db import models
 from django.forms import IntegerField
 
+
 # Create your models here.
 
 class Category(models.Model):
@@ -35,9 +36,28 @@ class Product(models.Model):
             return Product.objects.filter(category = category_id)
         else:
             return Product.get_all_products();  
-# class Customer(models.Model):
-#     first_name = models.CharField(max_length=50)
-#     last_name = models.CharField(max_length=50)
-#     phone = models.CharField(max_length=15)
-#     email = models.EmailField()
-#     password = models.CharField(max_length=500)    
+
+class Customer(models.Model):
+    
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    password = models.CharField(max_length=500) 
+
+
+
+    # def __str__(self):
+    #         return self.email
+    def isExists(uemail):
+        if Customer.objects.filter(email = uemail):
+            return True
+        else: 
+           return False
+    @staticmethod
+    def get_customer(email):
+        try:
+            return Customer.objects.get(email=email)
+        except:
+            return False  
+    
+   
