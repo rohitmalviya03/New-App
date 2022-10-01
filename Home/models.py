@@ -1,7 +1,10 @@
+from datetime import datetime
+from itertools import product
 from statistics import mode
 from unicodedata import category
 from django.db import models
 from django.forms import IntegerField
+import datetime
 
 
 # Create your models here.
@@ -21,6 +24,11 @@ class Product(models.Model):
     description = models.CharField(max_length=200, default='' , null=True , blank=True)
     image = models.ImageField(upload_to='uploads/products/')
     
+
+    @staticmethod
+    def get_product_by_id(ids):
+        return Product.objects.filter(id__in=ids)
+
     @staticmethod
     def getallproducts():
         return Product.objects.all()
@@ -53,11 +61,27 @@ class Customer(models.Model):
             return True
         else: 
            return False
+
+
     @staticmethod
     def get_customer(email):
         try:
             return Customer.objects.get(email=email)
         except:
             return False  
-    
-   
+
+class orders(models.Model):
+    customer =models.ForeignKey(Customer,max_length=50,on_delete=models.CASCADE,)
+    phone=models.CharField(max_length=50)
+    address=models.CharField(max_length=50)
+    price=models.CharField(max_length=50,default=0)
+    date=models.DateField(default=datetime.datetime.today)
+    quantity =models.IntegerField(default=0)
+  
+    product =models.ForeignKey(Product,max_length=50,on_delete=models.CASCADE,)
+
+    @staticmethod
+    def get_order_by_customer(customer_id):
+        return orders.objects.filter(customer=customer_id).order_by('-date')    # def placeOrder(self):
+    #     return self.save
+      

@@ -29,7 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+RAZOR_KEY_ID = 'rzp_test_snnXjQGli912g5'
 
+RAZOR_KEY_SECRET= 'oaOwTdI1yberrmt1sTlgMija'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -20,13 +20,21 @@ from django.urls import path,include
 from django.conf.urls.static import static
 
 from django.conf import settings
-from Home.views import index,showdata,login,register
+from Home.views import index, payment,success,showdata,register,login,order,logout,cart,checkout
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='homepage'),
     path('showdata/abc/',showdata),
     path('register/',register),
-    path('login/',login),
+    path('login/',login,name="login"),
+    path('logout',logout),
+    path('cart',cart,name="cart"),
+     path('checkout',checkout,name="checkout"),
+     path('order',order,name="order"),
+     path('payment',payment,name="payment"),
+     path('success',success,name="success")
+   
+   
    
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
